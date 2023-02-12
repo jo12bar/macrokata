@@ -4,7 +4,19 @@ fn print_vec<V: std::fmt::Debug>(vec: &Vec<V>) {
 }
 ////////// DO NOT CHANGE ABOVE HERE /////////
 
-// TODO: create `graph!()` macro.
+macro_rules! graph {
+    ($($node:literal -> ($($connection:literal),* $(,)?));* $(;)?) => {
+        {
+            let mut vec = Vec::new();
+            $(
+                $(
+                    vec.push(($node, $connection));
+                )*
+            )*
+            vec
+        }
+    };
+}
 
 ////////// DO NOT CHANGE BELOW HERE /////////
 
