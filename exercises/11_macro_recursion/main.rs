@@ -1,5 +1,18 @@
 // TODO: Create the `curry!()` macro.
 
+macro_rules! curry {
+    (_, $body:block) => {
+        $body
+    };
+
+    (($head_arg_name:ident : $head_arg_ty:ty) $(=> $next_arg_def:tt)*, $body:block) => {
+        move |$head_arg_name: $head_arg_ty| {
+            print_curried_argument($head_arg_name);
+            curry!($($next_arg_def)=>*, $body)
+        }
+    };
+}
+
 ////////// DO NOT CHANGE BELOW HERE /////////
 
 fn print_numbers(nums: &Vec<i32>) {
