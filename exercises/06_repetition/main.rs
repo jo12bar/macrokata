@@ -6,7 +6,11 @@ fn print_success() {
 
 // TODO: create `if_any!()` macro.
 
-////////// DO NOT CHANGE BELOW HERE /////////
+macro_rules! if_any {
+    ($($cond:expr),+ ; $body:block) => {
+        if $($cond)||+ $body
+    };
+}
 
 fn main() {
     if_any!(false, 0 == 1, true; {
